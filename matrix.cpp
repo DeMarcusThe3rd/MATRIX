@@ -35,5 +35,6 @@ void Matrix::set(int m, int n, double elem){ //set one specific element of the m
 }
 
 double Matrix::getElem(int m, int n){
-    return 0;
+    cout << x[m][n];
+    return x[m][n];
 }
