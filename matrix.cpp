@@ -38,3 +38,15 @@ double Matrix::getElem(int m, int n){
     cout << x[m][n];
     return x[m][n];
 }
+
+void Matrix::transpose(){
+    for (int row=0;row<3;row++){
+        for (int col=row;col<3;col++){
+            double temp = x[row][col];
+            x[row][col] = x[col][row];
+            x[col][row] = temp;
+        }
+    }   
+}
+
+
