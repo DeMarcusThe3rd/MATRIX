@@ -7,19 +7,18 @@
 using namespace std;
 
 void Matrix::print(){
-    for (int m =0;m<3;m++){ 
-        for (int n=0;n<3;n++){
-            cout << "[" << setw(7) << fixed << setprecision(3) << x[m][n] << "]";
-            cout << "  ";
+    for (int m=0;m<3;m++){ //loop through the rows
+        for (int n=0;n<3;n++){ //loop through the columns
+            cout << "[" << setw(7) << fixed << setprecision(3) << x[m][n] << "]" << "  ";  //print elements with formatting
         }
-        cout << endl;
+        cout << endl; //new line every 3 elements (row) 
     }
     cout << endl; 
 }
 
 void Matrix::set(double a,double b,double c,double d,double e,double f,double g,double h,double i){ //set all elements of the matrix 
     double values[9] = {a,b,c,d,e,f,g,h,i};
-    int index =0;
+    int index=0;    
 
     for (int m =0;m<3;m++){
         for (int n=0;n<3;n++){
