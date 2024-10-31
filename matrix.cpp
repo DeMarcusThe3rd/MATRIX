@@ -156,7 +156,7 @@ void Matrix::rMult(Matrix B){
     for (int m=0;m<3;m++){ 
         for (int n=0;n<3;n++){
             for(int i=0;i<3;i++){
-                    temp[m][n] += (x[m][i])*(B.x[i][n]);
+                temp[m][n] += (x[m][i])*(B.x[i][n]);
             }
         }
     }
@@ -174,4 +174,32 @@ void Matrix::sMult(double s){
             x[m][n]*=s;   
     }    
         }
+}
+
+double Matrix::det(){
+    double diagonal = 0.0;
+    double anti_diagonal = 0.0;
+
+    for(int n=0;n<3;n++){
+        diagonal += x[0][n] * x[1][(n+1)%3] * x[2][(n+2)%3];
+    }
+
+    for(int n=2;n>=0;n--){
+        anti_diagonal += x[0][n] * x[1][(n+2)%3] * x[2][(n+1)%3];
+    }
+
+    double determinant = diagonal - anti_diagonal;
+    cout << "Determinant is: " << determinant << endl;
+    return determinant;
+}
+
+void Matrix::inv(){
+    double core[3][3]={0};  
+    int index=0;
+
+    for(int n=2;n>=0;n--){
+        core[0][index] =((x[1][(n+1)%3])*(x[2][(n+2)%3]))-((x[1][(n+2)%3])*(x[2][(n+1)%3]));
+        index++;
+    }
+    for
 }
