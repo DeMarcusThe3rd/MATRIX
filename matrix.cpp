@@ -1,5 +1,7 @@
 #include <iostream>
 #include <iomanip>
+#include <fstream>
+#include <string>
 #include "matrix.h"
 
 using namespace std;
@@ -49,4 +51,57 @@ void Matrix::transpose(){
     }   
 }
 
+void Matrix::eye(){
+    for (int row=0;row<3;row++){
+        for(int col=0;col<3;col++){
+            if (row==col){
+                x[row][col] = 1.0;
+            }
+            else{
+                x[row][col] = 0.0;
+            }
+        }
+    }
+}
 
+void Matrix::zero(){
+    for (int row=0;row<3;row++){
+        for(int col=0;col<3;col++){
+            x[row][col] = 0.0;
+        }
+    }
+}
+
+void Matrix::save(string filename){
+    ofstream savef(filename);
+
+    if(savef.is_open()){
+        for (int row =0;row<3;row++){ 
+                for (int col=0;col<3;col++){
+                    savef << x[row][col] << " ";
+                }
+                savef << endl;
+            }
+        }
+    else{
+        cout <<"Error writing to file." <<endl;
+    }
+    savef.close();
+}
+
+
+void Matrix::load(string filename){
+    ifstream loadf(filename);
+    
+    if(loadf.is_open()){
+        for (int row = 0; row < 3; ++row) {
+            for (int col = 0; col < 3; ++col) {
+                loadf >> x[row][col];
+            }
+        }
+    }
+    else{
+        cout << "Error opening file." << endl;
+    }
+    loadf.close();
+}

@@ -1,5 +1,8 @@
 #include <iostream>
 #include <iomanip>
+#include <fstream>
+#include <string>
+
 
 using namespace std;
 
@@ -14,6 +17,10 @@ public:
     void set(double a,double b,double c,double d,double e,double f,double g,double h,double i);
     double getElem(int m, int n);
     void transpose();
+    void eye();
+    void zero();
+    void save(string filename);
+    void load(string filename);
 };
 
 
