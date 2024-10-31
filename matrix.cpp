@@ -108,7 +108,7 @@ void Matrix::load(string filename){
 }
 
 void Matrix::add(Matrix B){
-     for (int m =0;m<3;m++){ 
+     for (int m=0;m<3;m++){ 
         for (int n=0;n<3;n++){
             x[m][n]+= B.x[m][n];
         }
@@ -116,10 +116,62 @@ void Matrix::add(Matrix B){
 }
 
 void Matrix::sub(Matrix B){
-for (int m =0;m<3;m++){ 
+    for (int m=0;m<3;m++){ 
         for (int n=0;n<3;n++){
             x[m][n]-= B.x[m][n];
         }
     }
 }
 
+double Matrix::rcMult(Matrix B,int row, int col){
+    double result = 0.0;
+    for(int i=0;i<3;i++){
+        result += (x[row][i])*(B.x[i][col]);
+    }
+    cout << "Dot Product: " << result << endl;
+    return result;
+}
+
+void Matrix::lMult(Matrix B){
+    double temp[3][3] ={0};
+
+    for (int m=0;m<3;m++){ 
+        for (int n=0;n<3;n++){
+            for(int i=0;i<3;i++){
+                    temp[m][n] += (B.x[m][i])*(x[i][n]);
+            }
+        }
+    }
+
+    for (int i=0;i<3;i++){
+        for(int j=0;j<3;j++){
+            x[i][j] = temp[i][j];
+        }
+    }
+}
+
+void Matrix::rMult(Matrix B){
+    double temp[3][3] ={0};
+
+    for (int m=0;m<3;m++){ 
+        for (int n=0;n<3;n++){
+            for(int i=0;i<3;i++){
+                    temp[m][n] += (x[m][i])*(B.x[i][n]);
+            }
+        }
+    }
+
+    for (int i=0;i<3;i++){
+        for(int j=0;j<3;j++){
+            x[i][j] = temp[i][j];
+        }
+    }
+}
+
+void Matrix::sMult(double s){
+    for (int m=0;m<3;m++){ 
+        for (int n=0;n<3;n++){
+            x[m][n]*=s;   
+    }    
+        }
+}

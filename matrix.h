@@ -23,4 +23,10 @@ public:
     void load(string filename);
     void add(Matrix B);
     void sub(Matrix B);
+    double rcMult(Matrix B,int row, int col);
+    void lMult(Matrix B);
+    void rMult(Matrix B);
+    void sMult(double s);
+    double det(); 
+    void inv();
 };
