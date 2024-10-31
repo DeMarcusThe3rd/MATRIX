@@ -194,12 +194,21 @@ double Matrix::det(){
 }
 
 void Matrix::inv(){
-    double core[3][3]={0};  
-    int index=0;
+    double determinant = det();
+    if(determinant !=0){
+        Matrix core; 
+        for (int n=0;n<3;n++) {
+            for (int index=0;index<3;index++) {
+                core.x[n][index] = ((x[(n+1)%3][(index+1)%3]) * (x[(n+2)%3][(index+2)%3])) - 
+                ((x[(n+1)%3][(index+2)%3]) * (x[(n+2)%3][(index+1)%3]));
+            }
+        }
+        core.transpose();
 
-    for(int n=2;n>=0;n--){
-        core[0][index] =((x[1][(n+1)%3])*(x[2][(n+2)%3]))-((x[1][(n+2)%3])*(x[2][(n+1)%3]));
-        index++;
+        for(int m=0;m<3;m++){
+            for(int n=0;n<3;n++){
+                x[m][n] = (1/determinant)*(core.x[m][n]);
+            }
+        }
     }
-    for
 }
