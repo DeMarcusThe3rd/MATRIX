@@ -7,22 +7,23 @@
 using namespace std;
 
 void Matrix::print(){
-    for (int row =0;row<3;row++){ 
-        for (int col=0;col<3;col++){
-            cout << "[" << fixed << setprecision(3) << x[row][col] << "]";
+    for (int m =0;m<3;m++){ 
+        for (int n=0;n<3;n++){
+            cout << "[" << setw(7) << fixed << setprecision(3) << x[m][n] << "]";
             cout << "  ";
         }
         cout << endl;
     }
+    cout << endl; 
 }
 
 void Matrix::set(double a,double b,double c,double d,double e,double f,double g,double h,double i){ //set all elements of the matrix 
     double values[9] = {a,b,c,d,e,f,g,h,i};
     int index =0;
 
-    for (int row =0;row<3;row++){
-        for (int col=0;col<3;col++){
-            x[row][col] = values[index++];
+    for (int m =0;m<3;m++){
+        for (int n=0;n<3;n++){
+            x[m][n] = values[index++];
         }
     }
 }
@@ -42,32 +43,32 @@ double Matrix::getElem(int m, int n){
 }
 
 void Matrix::transpose(){
-    for (int row=0;row<3;row++){
-        for (int col=row;col<3;col++){
-            double temp = x[row][col];
-            x[row][col] = x[col][row];
-            x[col][row] = temp;
+    for (int m=0;m<3;m++){
+        for (int n=m;n<3;n++){
+            double temp = x[m][n];
+            x[m][n] = x[n][m];
+            x[n][m] = temp;
         }
     }   
 }
 
 void Matrix::eye(){
-    for (int row=0;row<3;row++){
-        for(int col=0;col<3;col++){
-            if (row==col){
-                x[row][col] = 1.0;
+    for (int m=0;m<3;m++){
+        for(int n=0;n<3;n++){
+            if (m==n){
+                x[m][n] = 1.0;
             }
             else{
-                x[row][col] = 0.0;
+                x[m][n] = 0.0;
             }
         }
     }
 }
 
 void Matrix::zero(){
-    for (int row=0;row<3;row++){
-        for(int col=0;col<3;col++){
-            x[row][col] = 0.0;
+    for (int m=0;m<3;m++){
+        for(int n=0;n<3;n++){
+            x[m][n] = 0.0;
         }
     }
 }
@@ -76,9 +77,9 @@ void Matrix::save(string filename){
     ofstream savef(filename);
 
     if(savef.is_open()){
-        for (int row =0;row<3;row++){ 
-                for (int col=0;col<3;col++){
-                    savef << x[row][col] << " ";
+        for (int m =0;m<3;m++){ 
+                for (int n=0;n<3;n++){
+                    savef << x[m][n] << " ";
                 }
                 savef << endl;
             }
@@ -94,9 +95,9 @@ void Matrix::load(string filename){
     ifstream loadf(filename);
     
     if(loadf.is_open()){
-        for (int row = 0; row < 3; ++row) {
-            for (int col = 0; col < 3; ++col) {
-                loadf >> x[row][col];
+        for (int m = 0; m < 3; ++m) {
+            for (int n = 0; n < 3; ++n) {
+                loadf >> x[m][n];
             }
         }
     }
@@ -105,3 +106,20 @@ void Matrix::load(string filename){
     }
     loadf.close();
 }
+
+void Matrix::add(Matrix B){
+     for (int m =0;m<3;m++){ 
+        for (int n=0;n<3;n++){
+            x[m][n]+= B.x[m][n];
+        }
+    }
+}
+
+void Matrix::sub(Matrix B){
+for (int m =0;m<3;m++){ 
+        for (int n=0;n<3;n++){
+            x[m][n]-= B.x[m][n];
+        }
+    }
+}
+

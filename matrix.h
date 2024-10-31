@@ -21,6 +21,6 @@ public:
     void zero();
     void save(string filename);
     void load(string filename);
+    void add(Matrix B);
+    void sub(Matrix B);
 };
-
-
