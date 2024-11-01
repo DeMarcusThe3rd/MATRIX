@@ -20,7 +20,7 @@ void Matrix::set(double a,double b,double c,double d,double e,double f,double g,
     double values[9] = {a,b,c,d,e,f,g,h,i};  //input for the values of the 3x3
     int index=0;    
 
-    for (int m =0;m<3;m++){     //nested for loop to iterate through indexes mn [row][column] of the array 
+    for (int m=0;m<3;m++){     //nested for loop to iterate through indexes mn [row][column] of the array 
         for (int n=0;n<3;n++){     
             x[m][n] = values[index++]; //set the element at the specific matrix index 
         }
@@ -212,6 +212,6 @@ void Matrix::inv(){  //calculates the inverse of the current matrix
         }
     }
     else{
-        cout << "This Matrix has no inverse." <<endl;  //message to notify non-inverse matrix
+        cout << "This Matrix is singular and has no inverse." <<endl;  //message to notify non-inverse matrix
     }
 }
