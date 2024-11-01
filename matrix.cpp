@@ -6,7 +6,7 @@
 
 using namespace std;
 
-void Matrix::print(){
+void Matrix::print(){  //displays all elements of the current matrix 
     for (int m=0;m<3;m++){ //loop through the rows
         for (int n=0;n<3;n++){ //loop through the columns
             cout << "[" << setw(7) << fixed << setprecision(3) << x[m][n] << "]" << "  ";  //print elements with formatting
@@ -88,7 +88,6 @@ void Matrix::save(string filename){  //saves a matrix in a .txt file
     }
     savef.close();  //closes file stream regardless
 }
-
 
 void Matrix::load(string filename){  //loads a matrix saved in a .txt file 
     ifstream loadf(filename);  //declare "loadf" as an input file stream to a file 
