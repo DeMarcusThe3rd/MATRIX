@@ -37,8 +37,14 @@ void Matrix::set(int m, int n, double elem){ //set one specific element of the m
 }
 
 double Matrix::getElem(int m, int n){  //get element at the specified index 
-    cout << x[m][n];  //displays the element retrieved 
-    return x[m][n];  //returns the element as a double for calculation purposes 
+    if ((m>=0 && m<3) &&(n>=0 && n<3)){ //condition for the input index to be within bounds (0 to 2)
+        cout << x[m][n];  //displays the element retrieved 
+        return x[m][n];  //returns the element as a double for calculation purposes
+    }
+    else{
+        cout << "Matrix is 3x3, Index out of Bounds" <<endl;  //prints error message 
+        return 0;
+    } 
 }
 
 void Matrix::transpose(){  //tranposes the current matrix (swaps row with column and vice versa) 
@@ -75,7 +81,8 @@ void Matrix::zero(){  //sets the current matrix to a zero matrix
 void Matrix::save(string filename){  //saves a matrix in a .txt file 
     ofstream savef(filename);  //declare "savef" as output stream to a file 
 
-    if(savef.is_open()){  //condition to check if file is opened successfully 
+    if(savef.is_open()){  //condition to check if file is opened successfully
+        cout << "File is opened! Writing to " << filename << "!" << endl; 
         for (int m=0;m<3;m++){   //nested for loop to iterate through indexes mn [row][column] of the array 
                 for (int n=0;n<3;n++){  
                     savef << x[m][n] << " ";  //saves element read into output file stream with formatting 
@@ -84,7 +91,7 @@ void Matrix::save(string filename){  //saves a matrix in a .txt file
             }
         }
     else{
-        cout << "Error writing to file." <<endl;  //error message displayed if file not found 
+        cout << "Error writing to " << filename << "!" <<  endl;   //error message displayed if file not found 
     }
     savef.close();  //closes file stream regardless
 }
@@ -93,6 +100,7 @@ void Matrix::load(string filename){  //loads a matrix saved in a .txt file
     ifstream loadf(filename);  //declare "loadf" as an input file stream to a file 
     
     if(loadf.is_open()){  //condition to check if file is opened successfully 
+        cout << "File is opened! Reading from " << filename << "!" <<  endl; 
         for (int m=0;m<3;m++) {  //nested for loop to iterate through indexes mn [row][column] of the array 
             for (int n=0;n<3;n++) {
                 loadf >> x[m][n];  //loads elements saved into the matrix
@@ -101,7 +109,7 @@ void Matrix::load(string filename){  //loads a matrix saved in a .txt file
     }
 
     else{
-        cout << "Error opening file." << endl; //error message displayed if file not found. 
+        cout << "Error reading " << filename << "!" <<  endl; //error message displayed if file not found. 
     }
     loadf.close();  //closes file stream regardless 
 }
@@ -127,7 +135,7 @@ double Matrix::rcMult(Matrix B,int row, int col){  //dot product between current
     for(int i=0;i<3;i++){  //iterates through the elements along the row and column
         result += (x[row][i])*(B.x[i][col]);  
     }
-    cout << "Dot Product: " << result << endl; //displays the result 
+    cout << "Dot Product: " <<  result << endl; //displays the result 
     return result; //returns the result 
 }
 
